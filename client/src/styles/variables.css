@@ -1,0 +1,38 @@
+:root {
+  /* Colors - Premium Dark Theme */
+  --hue-primary: 250; /* Deep Purple/Blue */
+  --hue-secondary: 190; /* Cyan/Teal */
+  
+  --clr-bg-dark: hsl(240, 10%, 8%);
+  --clr-bg-card: hsl(240, 10%, 12%, 0.7); /* Glassy */
+  --clr-bg-card-hover: hsl(240, 10%, 15%, 0.8);
+  
+  --clr-primary: hsl(var(--hue-primary), 70%, 60%);
+  --clr-primary-glow: hsl(var(--hue-primary), 70%, 60%, 0.5);
+  --clr-secondary: hsl(var(--hue-secondary), 80%, 60%);
+  
+  --clr-text-main: hsl(0, 0%, 95%);
+  --clr-text-muted: hsl(240, 5%, 70%);
+  --clr-border: hsl(240, 10%, 25%);
+  
+  /* Gradients */
+  --grad-main: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+  --grad-glass: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}

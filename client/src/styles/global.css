@@ -1,0 +1,77 @@
+@import './variables.css';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--clr-bg-dark);
+    color: var(--clr-text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(var(--hue-primary), 50, 50, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(var(--hue-secondary), 50, 50, 0.1) 0%, transparent 40%);
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Utilities */
+.container {
+    width: min(90%, 1200px);
+    margin-inline: auto;
+    padding-block: var(--space-md);
+}
+
+.glass-panel {
+    background: var(--clr-bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--clr-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+    background: var(--grad-main);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px var(--clr-primary-glow);
+}
+
+.btn-icon {
+    background: var(--grad-glass);
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text-main);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background: var(--clr-bg-card-hover);
+    border-color: var(--clr-primary);
+}
