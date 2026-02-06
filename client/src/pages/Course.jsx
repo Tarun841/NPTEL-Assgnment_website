@@ -17,8 +17,12 @@ const Course = () => {
     }, [courseId]);
 
     const loadWeeks = async () => {
-        const data = await api.getWeeks(courseId);
-        setWeeks(data);
+        try {
+            const data = await api.getWeeks(courseId);
+            setWeeks(data);
+        } catch (error) {
+            console.error("Error loading weeks:", error);
+        }
     };
 
     const handleAddWeek = async (e) => {
@@ -48,6 +52,12 @@ const Course = () => {
             </div>
 
             <div className="card-grid">
+                {weeks.length === 0 && (
+                    <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem', color: 'var(--clr-text-muted)' }}>
+                        <p>No weeks available for this course.</p>
+                        {!isEditMode && <p style={{ fontSize: '0.9rem' }}>Turn on Edit Mode to add one.</p>}
+                    </div>
+                )}
                 {weeks.map(week => (
                     <Link key={week.id} to={`/week/${week.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                         <div className="glass-panel card" style={{ position: 'relative' }}>

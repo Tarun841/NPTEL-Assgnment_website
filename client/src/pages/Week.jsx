@@ -28,8 +28,12 @@ const Week = () => {
     }, [answers]);
 
     const loadAnswers = async () => {
-        const data = await api.getAnswers(weekId);
-        setAnswers(data);
+        try {
+            const data = await api.getAnswers(weekId);
+            setAnswers(data);
+        } catch (error) {
+            console.error("Error loading answers:", error);
+        }
     };
 
     const handleAddAnswer = async (e) => {

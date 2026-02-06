@@ -17,8 +17,13 @@ const Home = () => {
     }, []);
 
     const loadCourses = async () => {
-        const data = await api.getCourses();
-        setCourses(data);
+        try {
+            const data = await api.getCourses();
+            setCourses(data);
+        } catch (error) {
+            console.error("Error loading courses:", error);
+            // Optional: Set an error state to show in UI
+        }
     };
 
     const handleAddCourse = async (e) => {

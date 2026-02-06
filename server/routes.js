@@ -6,17 +6,37 @@ const db = require('./db');
 const getCollection = async (collectionName, field, value, orderByField, orderDir = 'asc') => {
     let ref = db.collection(collectionName);
     if (field && value) {
-        // In Firestore, value types must match. Assuming IDs may be strings now but existing foreign keys were numbers.
-        // We'll store foreign keys as strings if we are generating new IDs, but migration might keep them as numbers.
-        // Let's try to match loosely or convert.
-        // For safety, let's treat foreign keys as strings since Firestore IDs are strings.
         ref = ref.where(field, '==', value);
-    }
-    if (orderByField) {
+        // Note: We deliberately DO NOT use .orderBy() here because Firestore requires a composite index
+        // for queries with .where() and .orderBy() on different fields.
+        // We will sort in memory instead.
+    } else if (orderByField) {
+        // If there's no .where(), simple .orderBy() works fine without custom index
         ref = ref.orderBy(orderByField, orderDir);
     }
+
     const snapshot = await ref.get();
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    let results = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // In-memory sort if we couldn't do it in Firestore (i.e., we had a filter)
+    if (field && value && orderByField) {
+        results.sort((a, b) => {
+            let valA = a[orderByField];
+            let valB = b[orderByField];
+
+            // Handle numeric sort if looks like numbers
+            if (!isNaN(valA) && !isNaN(valB)) {
+                valA = Number(valA);
+                valB = Number(valB);
+            }
+
+            if (valA < valB) return orderDir === 'asc' ? -1 : 1;
+            if (valA > valB) return orderDir === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }
+
+    return results;
 };
 
 // --- Courses ---

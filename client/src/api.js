@@ -3,6 +3,7 @@ const API_URL = '/api';
 export const api = {
     getCourses: async () => {
         const res = await fetch(`${API_URL}/courses`);
+        if (!res.ok) throw new Error(`Failed to fetch courses: ${res.status}`);
         return res.json();
     },
     addCourse: async (course) => {
@@ -15,6 +16,7 @@ export const api = {
     },
     getWeeks: async (courseId) => {
         const res = await fetch(`${API_URL}/courses/${courseId}/weeks`);
+        if (!res.ok) throw new Error(`Failed to fetch weeks: ${res.status}`);
         return res.json();
     },
     addWeek: async (courseId, week) => {
@@ -27,6 +29,7 @@ export const api = {
     },
     getAnswers: async (weekId) => {
         const res = await fetch(`${API_URL}/weeks/${weekId}/answers`);
+        if (!res.ok) throw new Error(`Failed to fetch answers: ${res.status}`);
         return res.json();
     },
     addAnswer: async (weekId, answer) => {
