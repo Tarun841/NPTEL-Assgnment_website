@@ -63,9 +63,7 @@ router.post('/courses', async (req, res) => {
 router.get('/courses/:courseId/weeks', async (req, res) => {
     const { courseId } = req.params;
     try {
-        // Note: courseId is passed as string from URL. Ensure stored data matches type.
-        // If we migrate number IDs -> stored as number. If new IDs -> string.
-        // We will try string first.
+        // Fetch weeks for the course
         let weeks = await getCollection('weeks', 'courseId', courseId, 'number', 'asc');
 
         // Fallback: if no weeks found, maybe courseId is stored as number?
@@ -83,7 +81,6 @@ router.post('/courses/:courseId/weeks', async (req, res) => {
     const { courseId } = req.params;
     const { title, number } = req.body;
     try {
-        // Store courseId as string to be consistent with future string IDs
         const docRef = await db.collection('weeks').add({
             courseId: courseId,
             title,

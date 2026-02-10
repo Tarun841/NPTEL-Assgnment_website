@@ -1,0 +1,54 @@
+mutation CreateSeedData @transaction @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  user_insertMany(data: [
+    {
+      id: "6772c336-7b57-4d21-b96b-74e0f87e1715",
+      displayName: "Demo User 1",
+      email: "demouser1@example.com",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "2e39e977-89c6-45b8-a91d-6194fdc17ba9",
+      displayName: "Demo User 2",
+      email: "demouser2@example.com",
+      createdAt: "2024-04-27T14:00:00Z"
+    }
+  ])
+  course_insertMany(data: [
+    {
+      id: "89319b75-1c5b-4822-b911-9a503b94c282",
+      userId: "6772c336-7b57-4d21-b96b-74e0f87e1715",
+      name: "Introduction to Data Connect",
+      startDate: "2024-05-01",
+      endDate: "2024-06-01",
+      createdAt: "2024-04-28T10:00:00Z"
+    },
+    {
+      id: "122b3c41-0550-4b82-8695-e59e15998c64",
+      userId: "2e39e977-89c6-45b8-a91d-6194fdc17ba9",
+      name: "Advanced Firebase Topics",
+      startDate: "2024-05-15",
+      endDate: "2024-07-01",
+      createdAt: "2024-04-29T16:00:00Z"
+    }
+  ])
+  assessment_insertMany(data: [
+    {
+      id: "c613c645-e55c-4a49-92e8-2049546d1c02",
+      courseId: "89319b75-1c5b-4822-b911-9a503b94c282",
+      title: "Data Connect Basics Quiz",
+      type: "Quiz",
+      maxMarks: 20,
+      dueDate: "2024-05-08T23:59:59Z",
+      createdAt: "2024-05-01T09:00:00Z"
+    },
+    {
+      id: "f2b6d2a4-4d5d-45e1-a36b-f2af904d619c",
+      courseId: "122b3c41-0550-4b82-8695-e59e15998c64",
+      title: "Cloud Functions Deep Dive",
+      type: "Assignment",
+      maxMarks: 50,
+      dueDate: "2024-05-29T23:59:59Z",
+      createdAt: "2024-05-16T11:00:00Z"
+    }
+  ])
+}

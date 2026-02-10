@@ -1,0 +1,33 @@
+mutation CreateUser @auth(level: USER) {
+  user_insert(data: {
+    displayName: "New User",
+    createdAt_expr: "request.time"
+  })
+}
+
+query ListCourses @auth(level: USER) {
+  courses {
+    id
+    name
+    description
+  }
+}
+
+mutation UpdateAssessment($id: UUID!, $score: Int) @auth(level: USER) {
+  assessment_update(
+    id: $id,
+    data: {
+      score: $score
+    }
+  )
+}
+
+query GetAssessmentsForCourse($courseId: UUID!) @auth(level: USER) {
+  assessments(where: {courseId: {eq: $courseId}}) {
+    id
+    title
+    dueDate
+    score
+    maxMarks
+  }
+}
