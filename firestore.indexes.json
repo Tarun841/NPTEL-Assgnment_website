@@ -1,4 +1,33 @@
 {
-    "indexes": [],
+    "indexes": [
+        {
+            "collectionGroup": "weeks",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "courseId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "number",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "answers",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "weekId",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "questionNo",
+                    "order": "ASCENDING"
+                }
+            ]
+        }
+    ],
     "fieldOverrides": []
 }
